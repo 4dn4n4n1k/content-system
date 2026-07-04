@@ -1,0 +1,16 @@
+{% extends "_base.html" %}
+{% block style %}
+  h2 { font-size: 72px; margin-bottom: 70px; }
+  .items { display: inline-block; text-align: left; }
+  .item { font-size: 48px; margin: 26px 0; display: flex; align-items: baseline; }
+  .item .marker { color: {{ brand.accent }}; font-family: "{{ brand.mono }}", monospace;
+                  margin-right: 28px; font-size: 40px; }
+{% endblock %}
+{% block content %}
+  {% if title %}<h2>{{ title }}</h2>{% endif %}
+  <div class="items">
+    {% for item in items %}
+      <div class="item"><span class="marker">[{{ "%02d" % loop.index }}]</span> {{ item }}</div>
+    {% endfor %}
+  </div>
+{% endblock %}

@@ -1,0 +1,25 @@
+{% extends "_base.html" %}
+{% block style %}
+  h2 { font-size: 64px; margin-bottom: 90px; }
+  .flow { display: flex; align-items: center; justify-content: center; gap: 0; }
+  .node {
+    background: {{ brand.panel }}; border: 2px solid {{ brand.accent }}88;
+    border-radius: 18px; padding: 44px 52px; max-width: 380px;
+    box-shadow: 0 0 40px {{ brand.accent }}22;
+  }
+  .node .name { font-size: 40px; font-weight: 700; }
+  .node .desc { font-size: 26px; color: {{ brand.muted }}; margin-top: 14px; }
+  .arrow { font-size: 64px; color: {{ brand.accent2 }}; padding: 0 34px; }
+{% endblock %}
+{% block content %}
+  {% if title %}<h2>{{ title }}</h2>{% endif %}
+  <div class="flow">
+    {% for node in nodes %}
+      <div class="node">
+        <div class="name">{{ node.name if node.name is defined else node }}</div>
+        {% if node.desc is defined and node.desc %}<div class="desc">{{ node.desc }}</div>{% endif %}
+      </div>
+      {% if not loop.last %}<div class="arrow">&#10142;</div>{% endif %}
+    {% endfor %}
+  </div>
+{% endblock %}

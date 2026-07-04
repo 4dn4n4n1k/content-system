@@ -1,0 +1,15 @@
+{% extends "_base.html" %}
+{% block style %}
+  .stat { font-size: 260px; font-weight: 800; color: {{ brand.accent }};
+          font-family: "{{ brand.mono }}", monospace; line-height: 1;
+          text-shadow: 0 0 90px {{ brand.accent }}44; }
+  .label { font-size: 56px; margin-top: 44px; }
+  .source { font-size: 28px; color: {{ brand.muted }}; margin-top: 56px;
+            font-family: "{{ brand.mono }}", monospace; }
+{% endblock %}
+{% block content %}
+  {% if kicker %}<div class="kicker">{{ kicker }}</div>{% endif %}
+  <div class="stat">{{ stat }}</div>
+  <div class="label">{{ label }}</div>
+  {% if source %}<div class="source">SOURCE: {{ source }}</div>{% endif %}
+{% endblock %}

@@ -1,0 +1,11 @@
+{
+  "style_block": "Cinematic tech-noir, dark environment, neon accents.",
+  "shots": [
+    { "n": 1, "type": "ai", "prompt": "placeholder clip one", "duration": 5 },
+    { "n": 2, "type": "ai", "prompt": "placeholder clip two", "duration": 5 },
+    { "n": 3, "type": "diagram", "template": "stat_card",
+      "fields": { "kicker": "AUTOMATED DEFENSE", "stat": "4B+", "label": "intrusion attempts blocked last year", "source": "TEST DATA 2026" } },
+    { "n": 4, "type": "meme", "template": "This Is Fine",
+      "top": "our network is secure", "bottom": "4 billion attacks later" }
+  ]
+}

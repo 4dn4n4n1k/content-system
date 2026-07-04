@@ -1,0 +1,84 @@
+{
+  "generated_at": "2026-07-04T17:46:46+00:00",
+  "overall_score": 96,
+  "category_scores": {
+    "hook": 90,
+    "narrative": 94,
+    "clarity": 100,
+    "emotion": 90,
+    "curiosity": 100,
+    "visuals": 100
+  },
+  "est_duration_s": 28.7,
+  "total_words": 67,
+  "sections": [
+    "Test Video",
+    "Intro",
+    "The numbers"
+  ],
+  "findings": [
+    {
+      "severity": "warning",
+      "category": "hook",
+      "message": "no question or curiosity frame in the first 45s — give viewers something to want answered"
+    },
+    {
+      "severity": "warning",
+      "category": "emotion",
+      "message": "overall tension is low for this genre — the viewer never feels the threat. Raise the stakes in at least one section"
+    },
+    {
+      "severity": "suggestion",
+      "category": "narrative",
+      "message": "section 'Intro' is 54% of the script — consider splitting it",
+      "at_s": 0.0,
+      "section": "Intro"
+    },
+    {
+      "severity": "suggestion",
+      "category": "narrative",
+      "message": "section 'The numbers' is 46% of the script — consider splitting it",
+      "at_s": 15.4,
+      "section": "The numbers"
+    },
+    {
+      "severity": "suggestion",
+      "category": "hook",
+      "message": "nothing in the first 60s says why this matters *now* — one line of present-tense stakes adds urgency"
+    },
+    {
+      "severity": "strength",
+      "category": "hook",
+      "message": "strongest claim lands at ~15s — the open leads with stakes",
+      "at_s": 15.4
+    },
+    {
+      "severity": "strength",
+      "category": "clarity",
+      "message": "sentence lengths are consistently speakable"
+    },
+    {
+      "severity": "strength",
+      "category": "visuals",
+      "message": "2 visual opportunities spread across the script"
+    }
+  ],
+  "visual_opportunities": [
+    {
+      "at_s": 0.0,
+      "section": "Intro",
+      "kind": "broll",
+      "trigger": "Artificial intelligence is changing cybersecurity faster than anyone expected.",
+      "confidence": 0.6,
+      "rationale": "concrete imagery (artificial intelligence, cybersecurity) — natural b-roll"
+    },
+    {
+      "at_s": 15.4,
+      "section": "The numbers",
+      "kind": "stat_card",
+      "trigger": "Last year alone, automated defense systems blocked over four billion intrusion attempts wo",
+      "confidence": 0.9,
+      "rationale": "a headline number lands harder on screen than in the ear"
+    }
+  ]
+}

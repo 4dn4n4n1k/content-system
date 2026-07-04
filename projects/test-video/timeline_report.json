@@ -1,0 +1,136 @@
+{
+  "generated_at": "2026-07-04T17:46:48+00:00",
+  "timing_source": "timing.json",
+  "overall_score": 81,
+  "retention_risk": 68,
+  "category_scores": {
+    "hook": 31,
+    "pacing": 80,
+    "diversity": 100,
+    "narrative": 94,
+    "retention": 100
+  },
+  "findings": [
+    {
+      "severity": "critical",
+      "category": "hook",
+      "message": "shot 1 holds 9s inside the hook (max 6s) — early drop-off risk",
+      "shot": 1,
+      "at_s": 0.0
+    },
+    {
+      "severity": "critical",
+      "category": "hook",
+      "message": "shot 3 holds 8s inside the hook (max 6s) — early drop-off risk",
+      "shot": 3,
+      "at_s": 13.1
+    },
+    {
+      "severity": "critical",
+      "category": "hook",
+      "message": "shot 4 is a meme at 21s — memes before 60s undercut the hook",
+      "shot": 4,
+      "at_s": 21.0
+    },
+    {
+      "severity": "warning",
+      "category": "pacing",
+      "message": "shot 2 narrates at ~189 wpm — information overload, give the viewer a beat",
+      "shot": 2,
+      "at_s": 8.6
+    },
+    {
+      "severity": "warning",
+      "category": "pacing",
+      "message": "shot 4 narrates at ~195 wpm — information overload, give the viewer a beat",
+      "shot": 4,
+      "at_s": 21.0
+    },
+    {
+      "severity": "suggestion",
+      "category": "narrative",
+      "message": "shot 1: visual ('placeholder clip one…') shares no keywords with its narration — intentional contrast or a mismatch?",
+      "shot": 1,
+      "at_s": 0.0
+    },
+    {
+      "severity": "suggestion",
+      "category": "narrative",
+      "message": "shot 2: visual ('placeholder clip two…') shares no keywords with its narration — intentional contrast or a mismatch?",
+      "shot": 2,
+      "at_s": 8.6
+    },
+    {
+      "severity": "suggestion",
+      "category": "transitions",
+      "message": "shot 3 is a card after b-roll — a half-beat pause before the cut makes the reveal land harder",
+      "shot": 3,
+      "at_s": 13.1
+    },
+    {
+      "severity": "suggestion",
+      "category": "transitions",
+      "message": "a title card at shot 3 would open 'The numbers' cleanly",
+      "shot": 3,
+      "at_s": 13.1
+    },
+    {
+      "severity": "strength",
+      "category": "hook",
+      "message": "4 cuts inside the first 30s — lively open"
+    },
+    {
+      "severity": "strength",
+      "category": "diversity",
+      "message": "3 distinct shot types across 4 shots — good mix"
+    },
+    {
+      "severity": "strength",
+      "category": "hook",
+      "message": "strongest claim sits at 13s (shot 3) — hook leads with stakes",
+      "shot": 3
+    }
+  ],
+  "timeline": [
+    {
+      "shot": 1,
+      "type": "ai",
+      "template": null,
+      "start_s": 0.0,
+      "duration_s": 8.6,
+      "words": 22,
+      "wpm": 153,
+      "section": "Intro"
+    },
+    {
+      "shot": 2,
+      "type": "ai",
+      "template": null,
+      "start_s": 8.6,
+      "duration_s": 4.4,
+      "words": 14,
+      "wpm": 189,
+      "section": "Intro"
+    },
+    {
+      "shot": 3,
+      "type": "diagram",
+      "template": "stat_card",
+      "start_s": 13.1,
+      "duration_s": 7.9,
+      "words": 20,
+      "wpm": 152,
+      "section": "The numbers"
+    },
+    {
+      "shot": 4,
+      "type": "meme",
+      "template": "This Is Fine",
+      "start_s": 21.0,
+      "duration_s": 3.4,
+      "words": 11,
+      "wpm": 195,
+      "section": "The numbers"
+    }
+  ]
+}

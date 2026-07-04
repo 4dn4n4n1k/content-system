@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { width: 1920px; height: 1080px; overflow: hidden; }
+  body {
+    background: {{ brand.bg }};
+    background-image:
+      linear-gradient({{ brand.panel }}66 1px, transparent 1px),
+      linear-gradient(90deg, {{ brand.panel }}66 1px, transparent 1px);
+    background-size: 64px 64px;
+    color: {{ brand.text }};
+    font-family: "{{ brand.font }}", sans-serif;
+    display: flex; align-items: center; justify-content: center;
+    position: relative;
+  }
+  body::after { /* vignette */
+    content: ""; position: absolute; inset: 0; pointer-events: none;
+    background: radial-gradient(ellipse at center, transparent 55%, {{ brand.bg }} 100%);
+  }
+  .frame { position: absolute; width: 56px; height: 56px; border: 3px solid {{ brand.accent }}55; }
+  .tl { top: 48px; left: 48px; border-right: 0; border-bottom: 0; }
+  .tr { top: 48px; right: 48px; border-left: 0; border-bottom: 0; }
+  .bl { bottom: 48px; left: 48px; border-right: 0; border-top: 0; }
+  .br { bottom: 48px; right: 48px; border-left: 0; border-top: 0; }
+  .content { position: relative; z-index: 1; max-width: 1560px; text-align: center; }
+  .kicker {
+    font-family: "{{ brand.mono }}", monospace; font-size: 30px; letter-spacing: 8px;
+    text-transform: uppercase; color: {{ brand.accent }}; margin-bottom: 36px;
+  }
+  .accent { color: {{ brand.accent }}; }
+  .accent2 { color: {{ brand.accent2 }}; }
+  .muted { color: {{ brand.muted }}; }
+  {% block style %}{% endblock %}
+</style>
+</head>
+<body>
+  <div class="frame tl"></div><div class="frame tr"></div>
+  <div class="frame bl"></div><div class="frame br"></div>
+  <div class="content">{% block content %}{% endblock %}</div>
+</body>
+</html>

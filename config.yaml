@@ -1,0 +1,164 @@
+# ── Content System configuration ────────────────────────────────────────────
+
+video:
+  width: 1920
+  height: 1080
+  fps: 30
+
+# ── Providers ────────────────────────────────────────────────────────────────
+# Single switch point for every external service. Change `active` to swap a
+# provider; per-provider settings live under the provider's own key.
+providers:
+  video:
+    active: fal
+    fal:
+      # Model swaps freely as pricing changes — browse:
+      # https://fal.ai/models?categories=text-to-video
+      model: fal-ai/bytedance/seedance/v1/lite/text-to-video
+      # Arguments passed to the model alongside the prompt (model-specific).
+      params:
+        resolution: "720p"
+        duration: "5"
+      # Used only for the cost preview before generating (USD per second).
+      cost_per_second: 0.06
+      # Handy presets — copy one into model/params/cost_per_second above.
+      presets:
+        seedance_lite:
+          model: fal-ai/bytedance/seedance/v1/lite/text-to-video
+          params: { resolution: "720p", duration: "5" }
+          cost_per_second: 0.06
+        kling_standard:
+          model: fal-ai/kling-video/v2.1/standard/text-to-video
+          params: { duration: "5" }
+          cost_per_second: 0.05
+        wan_turbo:
+          model: fal-ai/wan/v2.2-a14b/text-to-video/turbo
+          params: { resolution: "720p" }
+          cost_per_second: 0.10
+
+  voice:
+    active: cartesia     # cartesia (CARTESIA_API_KEY) | edge (free) | elevenlabs
+    cartesia:
+      voice_id: 146485fd-8736-41c7-88a8-7cdd0da34d84   # the channel voice
+      model: sonic-3
+      language: en
+    edge:                # free fallback; list voices: python -m edge_tts --list-voices
+      voice: en-US-ChristopherNeural
+      rate: "+4%"
+      pitch: "+0Hz"
+    elevenlabs:
+      voice_id: onwK4e9ZLuTAKqWW03F9
+      model: eleven_multilingual_v2
+
+  stock:
+    active: pexels       # requires PEXELS_API_KEY in .env
+
+  meme:
+    active: imgflip      # free catalog, no key
+
+  sfx:
+    active: synthesized  # placeholder ffmpeg-generated sounds into sfx/
+
+  music:
+    active: none         # no provider yet — drop files into assets/music/
+
+# ── Creative Director ────────────────────────────────────────────────────────
+# Script-level creative review (`python pipeline.py director`), run before the
+# shot list exists. Report-only. Defaults live in system/director/rules.py.
+director:
+  wpm: 140
+  hook:
+    window_s: 30
+    need_question_by_s: 45
+  clarity:
+    long_sentence_words: 30
+    max_numbers_per_sentence: 2
+  narrative:
+    dry_stretch_s: 90
+  visuals:
+    min_confidence: 0.5
+
+# ── Timeline Critic ──────────────────────────────────────────────────────────
+# Editorial review thresholds (`python pipeline.py critic`). Report-only —
+# it never edits the script or shot list. Defaults live in system/critic/rules.py;
+# anything set here overrides them.
+critic:
+  wpm: 140                   # speech rate for duration estimates pre-align
+  hook:
+    window_s: 30
+    max_shot_s: 6
+    min_shots: 3
+  pacing:
+    max_shot_s: 12
+    slow_shot_s: 9
+    max_wpm: 175
+  diversity:
+    max_same_type_run: 3
+    max_memes: 3
+  retention:
+    interrupt_interval_s: 60
+    static_sequence_s: 20
+
+# ── Asset Intelligence ───────────────────────────────────────────────────────
+# Decision layer for stock shots: plans search concepts, scores candidates,
+# and falls back to AI generation when stock can't clear the bar. Fallback
+# generations are included in the broll cost gate before anything is spent.
+asset_intelligence:
+  enabled: true
+  fallback_threshold: 0.72   # best stock score below this -> AI generation
+  max_candidates: 20
+  planner:
+    engine: heuristic        # future: llm
+    synonyms: true
+    keyword_expansion: true
+  scoring:                   # weights are normalized; tune freely
+    relevance: 0.40
+    resolution: 0.20         # orientation folded in (portrait ≈ unusable)
+    duration: 0.15
+    metadata: 0.10
+    popularity: 0.10
+    provider: 0.05
+  selector:
+    max_clips: 3             # stitch up to N clips when the slot is long
+    low_confidence: 0.5      # below this, the pick is flagged with reasons
+
+graphics:
+  # motion = animated cards via Remotion (motion/), static = Playwright PNGs
+  renderer: motion
+
+ingest:
+  # If YouTube bot-checks the transcript fetch, cookies from this browser are
+  # used (must be a browser you're signed in to YouTube with). Leave empty to
+  # auto-try firefox, edge, chrome.
+  cookies_from_browser: ""
+
+brand:
+  bg: "#0a0e17"
+  panel: "#111827"
+  accent: "#00e5a0"      # neon green
+  accent2: "#38bdf8"     # cyan
+  text: "#e5e7eb"
+  muted: "#94a3b8"
+  font: "Segoe UI"
+  mono: "Consolas"
+
+captions:
+  enabled: true
+  style: karaoke         # karaoke = word-by-word accent highlight | block = static chunks
+  words_per_line: 4      # words per caption chunk
+  font: "Segoe UI"
+  font_size: 64          # in 1080p pixels
+  margin_v: 90           # distance from bottom
+
+music:
+  volume: 0.10           # music bed volume under voiceover (0–1)
+
+sfx:
+  enabled: true          # whoosh on cuts, impact on card entrances, pop on memes
+  volume: 0.45           # SFX level under the voice (files in sfx/, replaceable)
+
+audio:
+  loudnorm: true         # normalize final mix to -14 LUFS (YouTube's target)
+
+whisper:
+  model: small           # tiny | base | small | medium (CPU int8)

@@ -1,0 +1,25 @@
+{% extends "_base.html" %}
+{% block style %}
+  .meme-frame {
+    display: inline-block; position: relative; border: 10px solid #fff;
+    border-radius: 8px; transform: rotate(-1.5deg);
+    box-shadow: 0 30px 80px rgba(0,0,0,0.6), 0 0 60px {{ brand.accent }}22;
+  }
+  .meme-frame img { display: block; width: {{ width }}px; height: {{ height }}px; }
+  .meme-text {
+    position: absolute; left: 0; width: 100%; padding: 0 3%; box-sizing: border-box;
+    text-align: center; font-family: Impact, "Arial Black", sans-serif;
+    font-size: {{ font_size }}px; line-height: 1.05; text-transform: uppercase; color: #fff;
+    -webkit-text-stroke: 3px black;
+    text-shadow: 3px 3px 0 #000, -3px 3px 0 #000, 3px -3px 0 #000, -3px -3px 0 #000;
+  }
+  .meme-top { top: 2.5%; }
+  .meme-bottom { bottom: 2.5%; }
+{% endblock %}
+{% block content %}
+  <div class="meme-frame">
+    <img src="{{ image }}">
+    {% if top %}<div class="meme-text meme-top">{{ top }}</div>{% endif %}
+    {% if bottom %}<div class="meme-text meme-bottom">{{ bottom }}</div>{% endif %}
+  </div>
+{% endblock %}

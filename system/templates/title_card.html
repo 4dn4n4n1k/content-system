@@ -1,0 +1,11 @@
+{% extends "_base.html" %}
+{% block style %}
+  h1 { font-size: 118px; font-weight: 800; line-height: 1.08;
+       text-shadow: 0 0 60px {{ brand.accent }}33; }
+  .subtitle { font-size: 44px; color: {{ brand.muted }}; margin-top: 40px; font-weight: 400; }
+{% endblock %}
+{% block content %}
+  {% if kicker %}<div class="kicker">{{ kicker }}</div>{% endif %}
+  <h1>{{ title }}</h1>
+  {% if subtitle %}<div class="subtitle">{{ subtitle }}</div>{% endif %}
+{% endblock %}

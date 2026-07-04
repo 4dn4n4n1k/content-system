@@ -1,0 +1,12 @@
+{% extends "_base.html" %}
+{% block style %}
+  .quote { font-size: 68px; font-weight: 600; line-height: 1.35; font-style: italic; }
+  .quote::before { content: "\201C"; color: {{ brand.accent }}; }
+  .quote::after { content: "\201D"; color: {{ brand.accent }}; }
+  .attribution { font-size: 38px; color: {{ brand.accent2 }}; margin-top: 56px;
+                 font-family: "{{ brand.mono }}", monospace; }
+{% endblock %}
+{% block content %}
+  <div class="quote">{{ quote }}</div>
+  {% if attribution %}<div class="attribution">&mdash; {{ attribution }}</div>{% endif %}
+{% endblock %}

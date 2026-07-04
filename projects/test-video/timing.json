@@ -1,0 +1,22 @@
+{
+  "audio": "C:\\Users\\Adnan Anik\\Desktop\\contentsystem\\projects\\test-video\\assets\\voiceover\\voiceover.wav",
+  "duration": 24.388,
+  "shots": [
+    {
+      "n": 1,
+      "start": 0.0
+    },
+    {
+      "n": 2,
+      "start": 8.64
+    },
+    {
+      "n": 3,
+      "start": 13.08
+    },
+    {
+      "n": 4,
+      "start": 21.0
+    }
+  ]
+}

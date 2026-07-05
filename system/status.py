@@ -37,4 +37,6 @@ def run(project_slug: str | None) -> None:
           if f.suffix.lower() in (".wav", ".mp3", ".m4a", ".flac", ".ogg", ".aac")]
     print(f"{mark(bool(vo))} 9. voiceover   {vo[0].name if vo else 'run: python pipeline.py voiceover'}")
     print(f"{mark((project / 'timing.json').exists())} 10. align      timing.json + captions.ass")
-    print(f"{mark((dirs['output'] / 'final.mp4').exists())} 11. assemble   output/final.mp4")
+    print(f"{mark((project / 'render_plan.json').exists())} 11. renderplan render_plan.json "
+          f"(auto-runs during assemble)")
+    print(f"{mark((dirs['output'] / 'final.mp4').exists())} 12. assemble   output/final.mp4")

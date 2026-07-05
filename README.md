@@ -35,7 +35,8 @@ Requires Python 3.11+, Node.js 18+, and ffmpeg on PATH (`winget install ffmpeg`)
 | 8 | Graphics | auto | `python pipeline.py graphics` — animated motion-graphics cards via Remotion (stat count-ups, staggered diagrams) **and meme shots**: blank templates from Imgflip's free catalog with animated Impact captions, matched to the scene's beat (falls back to static cards if Node is unavailable) |
 | 9 | Voiceover | auto | `python pipeline.py voiceover` — AI narration via Cartesia (default, channel voice set in `config.yaml`), with edge-tts (free) and ElevenLabs as alternates. (Prefer your own voice? Drop a recording in `assets/voiceover/` instead and skip this command.) |
 | 10 | Align | auto | `python pipeline.py align` |
-| 11 | Assemble | auto | `python pipeline.py assemble` → `output/final.mp4` |
+| 11 | Render plan | auto | `python pipeline.py renderplan` — decides camera moves, zoom punches, SFX events, music fades per shot → `render_plan.json`. Assemble runs this automatically; run it manually to preview/tune decisions (`render:` in `config.yaml`). |
+| 12 | Assemble | auto | `python pipeline.py assemble` → executes the render plan → `output/final.mp4` |
 
 `python pipeline.py status` shows where you are at any point.
 

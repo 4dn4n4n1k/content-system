@@ -1,0 +1,168 @@
+{
+  "version": 1,
+  "generated_at": "2026-07-04T18:20:32+00:00",
+  "fps": 30,
+  "duration": 24.388,
+  "shots": [
+    {
+      "n": 1,
+      "type": "ai",
+      "kind": "video",
+      "start": 0.0,
+      "duration": 8.633,
+      "frames": 259,
+      "energy": 0.72,
+      "camera": {
+        "mode": "none",
+        "zoom_rate_per_frame": 0.0,
+        "zoom_max": 1.0,
+        "direction": "in",
+        "pan": "center"
+      },
+      "motion": {},
+      "caption_emphasis": "normal"
+    },
+    {
+      "n": 2,
+      "type": "ai",
+      "kind": "video",
+      "start": 8.64,
+      "duration": 4.433,
+      "frames": 133,
+      "energy": 0.93,
+      "camera": {
+        "mode": "none",
+        "zoom_rate_per_frame": 0.0,
+        "zoom_max": 1.0,
+        "direction": "in",
+        "pan": "center"
+      },
+      "motion": {},
+      "caption_emphasis": "normal"
+    },
+    {
+      "n": 3,
+      "type": "diagram",
+      "kind": "video",
+      "start": 13.08,
+      "duration": 7.933,
+      "frames": 238,
+      "energy": 0.9,
+      "camera": {
+        "mode": "none",
+        "zoom_rate_per_frame": 0.0,
+        "zoom_max": 1.0,
+        "direction": "in",
+        "pan": "center"
+      },
+      "motion": {},
+      "caption_emphasis": "high"
+    },
+    {
+      "n": 4,
+      "type": "meme",
+      "kind": "video",
+      "start": 21.0,
+      "duration": 3.4,
+      "frames": 102,
+      "energy": 1.0,
+      "camera": {
+        "mode": "none",
+        "zoom_rate_per_frame": 0.0,
+        "zoom_max": 1.0,
+        "direction": "in",
+        "pan": "center"
+      },
+      "motion": {},
+      "caption_emphasis": "normal"
+    }
+  ],
+  "cuts": [
+    {
+      "at_s": 8.64,
+      "from": 1,
+      "to": 2,
+      "type": "cut"
+    },
+    {
+      "at_s": 13.08,
+      "from": 2,
+      "to": 3,
+      "type": "cut"
+    },
+    {
+      "at_s": 21.0,
+      "from": 3,
+      "to": 4,
+      "type": "cut"
+    }
+  ],
+  "events": [
+    {
+      "t": 8.52,
+      "sfx": "whoosh",
+      "gain": 0.7,
+      "reason": "cut into shot 2"
+    },
+    {
+      "t": 12.96,
+      "sfx": "whoosh",
+      "gain": 0.7,
+      "reason": "cut into shot 3"
+    },
+    {
+      "t": 13.28,
+      "sfx": "impact",
+      "gain": 1.0,
+      "reason": "card lands (shot 3)"
+    },
+    {
+      "t": 20.88,
+      "sfx": "whoosh",
+      "gain": 0.7,
+      "reason": "cut into shot 4"
+    },
+    {
+      "t": 21.55,
+      "sfx": "pop",
+      "gain": 1.0,
+      "reason": "meme slam (shot 4)"
+    }
+  ],
+  "audio": {
+    "music_volume": 0.1,
+    "music_fade_in_s": 1.5,
+    "music_fade_out_s": 3.0,
+    "sfx_volume": 0.45,
+    "loudnorm": true,
+    "duck": {
+      "enabled": false
+    }
+  },
+  "captions": {
+    "enabled": true
+  },
+  "energy_curve": [
+    {
+      "t": 0.0,
+      "energy": 0.72
+    },
+    {
+      "t": 8.64,
+      "energy": 0.93
+    },
+    {
+      "t": 13.08,
+      "energy": 0.9
+    },
+    {
+      "t": 21.0,
+      "energy": 1.0
+    }
+  ],
+  "pattern_interrupts": [
+    13.08,
+    21.0
+  ],
+  "notes": []
+}

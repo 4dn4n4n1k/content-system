@@ -9,7 +9,8 @@ Stages:
   graphics                  render motion-graphic cards + memes
   voiceover [--voice NAME]  generate the AI voiceover from script.md
   align     [--audio FILE]  align voiceover audio, emit timing + captions
-  assemble  [--no-captions] build the final MP4
+  renderplan                plan camera/motion/SFX/audio per shot -> render_plan.json
+  assemble  [--no-captions] build the final MP4 (executes render_plan.json)
   status                    show what's done / missing for the current project
 
 All stages operate on the "current" project (the last one ingested) unless
@@ -43,6 +44,9 @@ def main() -> None:
     p = sub.add_parser("align", help="align the voiceover audio to the script")
     p.add_argument("--audio", help="voiceover file (default: first file in assets/voiceover/)")
 
+    sub.add_parser("renderplan", help="write render_plan.json (assemble runs this "
+                                      "automatically when needed)")
+
     p = sub.add_parser("assemble", help="build the final video")
     p.add_argument("--no-captions", action="store_true", help="skip caption burn-in")
 
@@ -72,6 +76,9 @@ def main() -> None:
     elif args.cmd == "align":
         from system.align import run
         run(args.project, audio=args.audio)
+    elif args.cmd == "renderplan":
+        from system.render_intelligence.planner import run
+        run(args.project)
     elif args.cmd == "assemble":
         from system.assemble import run
         run(args.project, captions=not args.no_captions)

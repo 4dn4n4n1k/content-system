@@ -142,6 +142,31 @@ brand:
   font: "Segoe UI"
   mono: "Consolas"
 
+# ── Render Intelligence ──────────────────────────────────────────────────────
+# Per-shot render decisions (`python pipeline.py renderplan`, auto-run by
+# assemble). The assembler executes render_plan.json; tune the decisions here.
+render:
+  camera:
+    kenburns_zoom_per_frame: 0.0008   # still-image push-in speed
+    kenburns_max: 1.12
+    alternate: false                  # vary in/out + pan across consecutive stills
+  motion:
+    zoom_punch: true                  # punch-in on long b-roll holds
+    punch_min_shot_s: 10
+    punch_scale: 1.08
+  cut_sfx:
+    whoosh_gain: 0.7
+    whoosh_offset_s: -0.12
+    impact_delay_s: 0.2
+    pop_delay_s: 0.55
+  audio:
+    music_fade_in_s: 1.5
+    music_fade_out_s: 3.0
+  energy:
+    hook_boost: 0.15
+    hook_window_s: 30
+    interrupt_gap_s: 60
+
 captions:
   enabled: true
   style: karaoke         # karaoke = word-by-word accent highlight | block = static chunks

@@ -32,7 +32,7 @@ def plan(shots: list[ShotRender], cfg: dict, reports: dict) -> None:
         if s.duration >= min_s:
             s.motion = MotionPlan(zoom_punch_at_s=s.duration / 2,
                                   zoom_punch_scale=scale,
-                                  reason=f"{s.duration:.0f}s hold ≥ {min_s:.0f}s")
+                                  reason=f"{s.duration:.0f}s hold >= {min_s:.0f}s")
         elif s.n in critic_punches and s.duration >= 4:
             s.motion = MotionPlan(zoom_punch_at_s=s.duration / 2,
                                   zoom_punch_scale=scale,

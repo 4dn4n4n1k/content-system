@@ -72,6 +72,21 @@ contentsystem/
 │   ├── sfx.py               #   numpy event-track mixing (SFX sourcing is provider-side)
 │   ├── status.py            #   per-project progress checklist
 │   ├── templates/           #   Jinja2 HTML card templates (static fallback renderer)
+│   ├── render_intelligence/ # Render Intelligence: per-shot render decisions -> render_plan.json
+│   │   ├── planner.py       #   orchestrator: build_plan / ensure_plan (auto-replan when
+│   │   │                    #   timing or asset kinds change); register() for future
+│   │   │                    #   AI/vision planner passes that refine the plan dict
+│   │   ├── models.py        #   CameraPlan, MotionPlan, ShotRender, CutPlan, SfxEvent,
+│   │   │                    #   AudioPlan, RenderPlan (versioned JSON contract)
+│   │   ├── timeline.py      #   shot skeletons + energy curve (type/duration/hook heuristic)
+│   │   │                    #   + pattern-interrupt map and gap notes
+│   │   ├── camera.py        #   Ken Burns for stills (rate/max/direction/pan, energy-scaled)
+│   │   ├── motion.py        #   zoom punches on long holds + critic recommendations
+│   │   ├── transitions.py   #   cut list + explicit SFX events (whoosh/impact/pop);
+│   │   │                    #   unrenderable critic transitions carried as recommendations
+│   │   ├── captions.py      #   enabled flag + per-shot emphasis from creative report
+│   │   ├── audio.py         #   music level/fades, sfx level, loudnorm, duck placeholder
+│   │   └── report.py        #   console summary of the plan
 │   ├── director/            # Creative Director: script-level review, pre-shot-list (report-only)
 │   │   ├── analyzer.py      #   orchestrator: ScriptDoc build (sections→sentences with
 │   │   │                    #   estimated timestamps), plugin registry (register()), scoring
@@ -217,11 +232,16 @@ User drops YouTube URL
                                        words to spoken words (difflib); each [SHOT n] marker
                                        snaps to its word's start time → timing.json;
                                        word-level karaoke captions → captions.ass
-→ `assemble`                         : per-shot segment render (scale/crop 1080p30; videos
-                                       loop+trim, PNGs get zoompan drift), concat demuxer,
-                                       SFX event track (whoosh/impact/pop) mixed with VO +
-                                       optional music, loudnorm −14 LUFS, .ass burn-in
-                                       → output/final.mp4
+→ `renderplan`                       : Render Intelligence: shotlist + timing + both editorial
+                                       reports → render_plan.json (camera moves, zoom punches,
+                                       explicit SFX events, music fades, energy curve, caption
+                                       emphasis, transition recommendations). Auto-run by
+                                       assemble; rerun manually after config tuning
+→ `assemble`                         : EXECUTES render_plan.json: per-shot segments (Ken Burns
+                                       from camera plan, zoom punches from motion plan,
+                                       signature sidecars re-render exactly what changed),
+                                       concat demuxer, plan's SFX event track + music fades,
+                                       loudnorm −14 LUFS, .ass burn-in → output/final.mp4
 ```
 
 Segment renders are cached; re-running `assemble` after a voiceover change re-renders
@@ -312,9 +332,22 @@ only shots whose duration changed (validated via ffprobe against the new timing)
 - Audio mastering: voice + music bed + SFX mixed (amix, resampled 48 kHz) and
   normalized to −14 LUFS / −1.5 dBTP (YouTube loudness target); music auto-ducking by
   static volume (side-chain planned).
-- Assembly engine: per-segment normalization (loop-or-trim to aligned duration,
-  scale/crop to 1920×1080@30), concat demuxer, single final encode (libx264 CRF 19,
-  AAC 192k, +faststart), stale-segment detection by duration.
+- **Render Intelligence** (`pipeline.py renderplan`, config `render:`): plans how
+  every shot renders before the assembler touches ffmpeg — Ken Burns parameters for
+  stills (rate/max/direction/pan, defaults reproduce the historical look), zoom
+  punches on b-roll holds ≥10s (plus Timeline Critic zoom-punch recommendations),
+  explicit SFX events replacing hardcoded assembler logic, music fade in/out
+  timing, per-shot energy curve (type/duration/hook heuristic) with
+  pattern-interrupt map, caption emphasis from the Creative Director's stat beats,
+  and cut-level transition recommendations carried (not yet renderable) → all in a
+  versioned render_plan.json. `ensure_plan()` auto-replans when timing or asset
+  kinds change, so `assemble` needs no extra steps. Future AI/vision planner passes
+  register via `render_intelligence.planner.register()` and refine the plan dict.
+- Assembly engine: executes render_plan.json — per-segment normalization
+  (loop-or-trim to aligned duration, scale/crop to 1920×1080@30, camera/motion
+  filters from the plan), concat demuxer, single final encode (libx264 CRF 19,
+  AAC 192k, +faststart). Segment invalidation by plan-signature sidecars: a changed
+  plan re-renders exactly the affected segments.
 
 **Planned (user-approved roadmap, in priority order):**
 - Thumbnail + title system: fal.ai image gen + text compositing, 3 variants/video;
